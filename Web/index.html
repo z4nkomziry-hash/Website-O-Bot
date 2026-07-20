@@ -1,792 +1,181 @@
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KrdDown - باشترین دابەزێنەری ڤیدیۆ و ستۆریێن تۆڕێن جڤاکی | 4K HDR Downloader | TikTok, Instagram, Facebook, YouTube, Pinterest">
-    <meta name="keywords" content="KrdDown, downloader, 4K, tiktok, instagram, facebook, youtube, pinterest, kurdish">
+    <meta name="description" content="KrdDown - باشترین دابەزێنەری ڤیدیۆ و ستۆریێن تۆڕێن جڤاکی | 4K HDR Downloader">
+    <meta name="keywords" content="KrdDown, downloader, tiktok, instagram, facebook, youtube, pinterest, kurdish, 4K">
     <title>KrdDown | دابەزێنەری 4K بێ واتەرمارک</title>
     <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icon.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="KrdDown">
-    <meta name="application-name" content="KrdDown">
     <meta name="theme-color" content="#0a0a1a">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;500;700;900&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg-gradient: radial-gradient(ellipse at 30% 40%, rgba(236,72,153,0.06) 0%, transparent 60%),
-                           radial-gradient(ellipse at 70% 60%, rgba(168,85,247,0.06) 0%, transparent 60%),
-                           #0a0a1a;
-            --bg-color: #0a0a1a;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --glass-bg: rgba(255,255,255,0.03);
-            --glass-border: rgba(255,255,255,0.06);
-            --glass-hover: rgba(255,255,255,0.12);
-            --input-bg: rgba(255,255,255,0.04);
-            --card-vip: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(168,85,247,0.05));
-        }
-        .light-mode {
-            --bg-gradient: radial-gradient(ellipse at 30% 40%, rgba(236,72,153,0.08) 0%, transparent 60%),
-                           radial-gradient(ellipse at 70% 60%, rgba(168,85,247,0.08) 0%, transparent 60%),
-                           #f8fafc;
-            --bg-color: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --glass-bg: rgba(15,23,42,0.03);
-            --glass-border: rgba(15,23,42,0.08);
-            --glass-hover: rgba(15,23,42,0.06);
-            --input-bg: rgba(15,23,42,0.04);
-            --card-vip: linear-gradient(135deg, #ffffff, rgba(168,85,247,0.05));
-        }
-        body {
-            font-family: 'Noto Kufi Arabic', sans-serif;
-            background: var(--bg-color);
-            background-image: var(--bg-gradient);
-            min-height: 100vh;
-            color: var(--text-main);
-            overflow-x: hidden;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            transition: all 0.4s ease;
-        }
-        .glass:hover { border-color: var(--glass-hover); box-shadow: 0 8px 40px rgba(0,0,0,0.15); }
-        .glass-light {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-        .btn-pink {
-            background: linear-gradient(135deg, #ec4899, #a855f7);
-            box-shadow: 0 4px 25px rgba(236,72,153,0.3);
-            transition: all 0.3s ease;
-        }
-        .btn-pink:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 40px rgba(236,72,153,0.5); }
-        .btn-snap { background: linear-gradient(135deg, #fffc00, #f1e400); color: #000000; }
-        .btn-snap:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(255,252,0,0.3); }
-        .btn-tg { background: linear-gradient(135deg, #0088cc, #24a1de); color: #ffffff; }
-        .btn-tg:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(0,136,204,0.3); }
-        .mode-btn {
-            padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer;
-            transition: all 0.3s ease; background: var(--input-bg); color: var(--text-muted);
-            border: none; font-family: inherit; display: flex; align-items: center; gap: 8px;
-        }
-        .mode-btn.active { background: linear-gradient(135deg, #ec4899, #a855f7); color: #fff; box-shadow: 0 4px 20px rgba(236,72,153,0.25); }
-        .input-main {
-            background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 14px;
-            padding: 16px 20px 16px 120px; color: var(--text-main); width: 100%; font-size: 14px;
-            font-family: inherit; transition: all 0.3s ease;
-        }
-        .input-main:focus { outline: none; border-color: #ec4899; box-shadow: 0 0 30px rgba(236,72,153,0.05); }
-        .input-wrapper { position: relative; }
-        html[dir="rtl"] .input-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 18px; z-index: 10; }
-        html[dir="rtl"] .paste-btn { position: absolute; left: 42px; top: 50%; transform: translateY(-50%); background: var(--glass-border); border: none; color: var(--text-muted); font-size: 12px; font-weight: 700; padding: 8px 14px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-family: inherit; display: flex; align-items: center; gap: 6px; z-index: 10; }
-        html[dir="rtl"] .clear-input-btn { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #ef4444; font-size: 16px; font-weight: 900; cursor: pointer; z-index: 10; transition: all 0.2s ease; background: none; border: none; padding: 4px; }
-        .neon-title { text-shadow: 0 0 30px rgba(236,72,153,0.2); }
-        .faq-item { border-bottom: 1px solid var(--glass-border); }
-        .faq-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 4px; font-size: 14px; font-weight: 700; color: var(--text-main); background: none; border: none; cursor: pointer; }
-        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--text-muted); font-size: 13px; line-height: 1.6; }
-        .star-rating { display: flex; flex-direction: row-reverse; justify-content: center; gap: 8px; }
-        .star-rating input { display: none; }
-        .star-rating label { font-size: 26px; color: var(--text-muted); cursor: pointer; transition: color 0.2s ease; }
-        .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #fbbf24; }
-        .history-card { background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-        .liquid-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: linear-gradient(90deg, #ec4899, #a855f7, #3b82f6, #06b6d4); width: 0%; transition: width 0.2s ease; border-radius: 0 0 14px 14px; }
-        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; max-width: 380px; width: 90%; }
-        .toast { background: rgba(15,23,42,0.95); border: 1px solid rgba(255,255,255,0.06); padding: 14px 20px; border-radius: 16px; color: #e2e8f0; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        .about-social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .about-social-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; border-radius: 14px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); font-size: 11px; font-weight: 700; color: var(--text-main); text-decoration: none; transition: all 0.3s ease; }
-        .about-social-btn i { font-size: 18px; margin-bottom: 5px; }
-        .about-social-btn.as-tt:hover { background: #ff0050; color: #fff; }
-        .about-social-btn.as-tg:hover { background: #0088cc; color: #fff; }
-        .about-social-btn.as-ig:hover { background: #e1306c; color: #fff; }
-        #pwaBanner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(150%); width: 92%; max-width: 500px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(236, 72, 153, 0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(236, 72, 153, 0.15); border-radius: 24px; z-index: 99999; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        #pwaBanner.show { transform: translateX(-50%) translateY(0); }
-        @keyframes serverGlow { 0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(16, 185, 129, 0.2); } 50% { transform: scale(1.03); box-shadow: 0 0 16px rgba(16, 185, 129, 0.5); } }
-        @keyframes ledPulse { 0%, 100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.2); } }
-        .server-animated-badge { animation: serverGlow 2.5s infinite ease-in-out; background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.25); backdrop-filter: blur(8px); }
-        .led-dot { width: 7px; height: 7px; background-color: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #10b981, 0 0 20px #10b981; animation: ledPulse 1.6s infinite ease-in-out; }
-        .custom-gallery-modal { display: none; position: fixed; z-index: 999999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(5, 5, 12, 0.95); backdrop-filter: blur(15px); align-items: center; justify-content: center; }
-        .custom-gallery-content { position: relative; width: 100%; max-width: 440px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .custom-gallery-close { position: absolute; top: -45px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
-        .custom-gallery-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; z-index: 10; }
-        .custom-gallery-prev { right: -60px; }
-        .custom-gallery-next { left: -60px; }
-        .welcome-modal { display: flex; position: fixed; inset: 0; z-index: 9999999; background: rgba(5, 5, 12, 0.7); backdrop-filter: blur(10px); align-items: center; justify-content: center; transition: all 0.3s ease-in-out; opacity: 0; pointer-events: none; }
-        .welcome-modal.show { opacity: 1; pointer-events: auto; }
-        .welcome-content { transform: scale(0.8); transition: all 0.3s ease-in-out; }
-        .welcome-modal.show .welcome-content { transform: scale(1); }
-        .network-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .network-btn:hover { transform: scale(1.08); }
-        .net-tiktok:hover { box-shadow: 0 0 20px rgba(255, 0, 80, 0.6); border-color: #ff0050; }
-        .net-instagram:hover { box-shadow: 0 0 20px rgba(225, 48, 108, 0.6); border-color: #e1306c; }
-        .net-facebook:hover { box-shadow: 0 0 20px rgba(24, 119, 242, 0.6); border-color: #1877f2; }
-        .net-pinterest:hover { box-shadow: 0 0 20px rgba(230, 0, 35, 0.6); border-color: #e60023; }
-        .dev-card-modern { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(168, 85, 247, 0.4); box-shadow: 0 0 15px rgba(168, 85, 247, 0.15); transition: all 0.3s ease; }
-        .dev-card-modern:hover { box-shadow: 0 0 25px rgba(168, 85, 247, 0.4), 0 0 25px rgba(59, 130, 246, 0.4); border-color: #a855f7; }
-        .plan-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-radius: 20px; padding: 20px; }
-        .plan-card:hover { transform: translateY(-5px); }
-        .plan-free { border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
-        .plan-pro { border: 2px solid rgba(245,158,11,0.5); background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(251,191,36,0.05)); box-shadow: 0 0 30px rgba(245,158,11,0.15); }
-        .plan-badge { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #000; font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 900; }
-        @media (max-width: 640px) {
-            .custom-gallery-content { max-width: 90%; padding: 10px; }
-            .custom-gallery-prev { right: 5px; }
-            .custom-gallery-next { left: 5px; }
-            .custom-gallery-close { top: -55px; }
-            html[dir="rtl"] .input-main { padding: 14px 16px 14px 110px; font-size: 13px; }
-            html[dir="rtl"] .paste-btn { left: 36px; padding: 6px 10px; font-size: 11px; }
-            html[dir="rtl"] .clear-input-btn { left: 8px; font-size: 14px; }
-            .mode-btn { font-size: 11px; padding: 6px 12px; }
-            .about-social-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#0a0a1a;--text:#fff;--muted:#94a3b8;--glass:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.06);--hover:rgba(255,255,255,0.12);--input:rgba(255,255,255,0.04)}
+        .light-mode{--bg:#f8fafc;--text:#0f172a;--muted:#64748b;--glass:rgba(15,23,42,0.03);--border:rgba(15,23,42,0.08);--hover:rgba(15,23,42,0.06);--input:rgba(15,23,42,0.04)}
+        body{font-family:'Noto Kufi Arabic',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:all 0.3s}
+        .glass{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:24px;transition:all 0.4s}
+        .glass:hover{border-color:var(--hover);box-shadow:0 8px 40px rgba(0,0,0,0.15)}
+        .btn-main{background:linear-gradient(135deg,#ec4899,#a855f7);box-shadow:0 4px 25px rgba(236,72,153,0.3);transition:all 0.3s;color:#fff;border:none;cursor:pointer;font-family:inherit;font-weight:700}
+        .btn-main:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 40px rgba(236,72,153,0.5)}
+        .input-main{background:var(--input);border:1px solid var(--border);border-radius:14px;padding:16px 20px 16px 110px;color:var(--text);width:100%;font-size:14px;font-family:inherit;transition:all 0.3s}
+        .input-main:focus{outline:none;border-color:#ec4899;box-shadow:0 0 30px rgba(236,72,153,0.05)}
+        .toast-container{position:fixed;top:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:10px;max-width:380px;width:90%}
+        .toast{background:rgba(15,23,42,0.95);border:1px solid rgba(255,255,255,0.06);padding:14px 20px;border-radius:16px;color:#e2e8f0;font-size:13px;font-weight:600;display:flex;align-items:center;gap:12px;box-shadow:0 15px 40px rgba(0,0,0,0.5)}
+        .mode-btn{padding:8px 16px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s;background:var(--input);color:var(--muted);border:none;font-family:inherit;display:flex;align-items:center;gap:8px}
+        .mode-btn.active{background:linear-gradient(135deg,#ec4899,#a855f7);color:#fff;box-shadow:0 4px 20px rgba(236,72,153,0.25)}
+        .plan-card{transition:all 0.4s;border-radius:20px;padding:20px}
+        .plan-card:hover{transform:translateY(-5px)}
+        .plan-free{border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03)}
+        .plan-pro{border:2px solid rgba(245,158,11,0.5);background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(251,191,36,0.05));box-shadow:0 0 30px rgba(245,158,11,0.15)}
+        .badge{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#000;font-size:10px;padding:4px 10px;border-radius:20px;font-weight:900}
+        .liquid-progress{position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,#ec4899,#a855f7,#3b82f6,#06b6d4);width:0%;transition:width 0.2s}
+        .input-wrapper{position:relative}
+        .input-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:18px;z-index:10}
+        .paste-btn{position:absolute;left:42px;top:50%;transform:translateY(-50%);background:var(--border);border:none;color:var(--muted);font-size:12px;font-weight:700;padding:8px 14px;border-radius:10px;cursor:pointer;transition:all 0.3s;font-family:inherit;display:flex;align-items:center;gap:6px;z-index:10}
+        .clear-btn{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#ef4444;font-size:16px;font-weight:900;cursor:pointer;z-index:10;transition:all 0.2s;background:none;border:none;padding:4px}
+        .server-badge{animation:serverGlow 2.5s infinite;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.25);backdrop-filter:blur(8px)}
+        .led-dot{width:7px;height:7px;background:#10b981;border-radius:50%;display:inline-block;box-shadow:0 0 10px #10b981,0 0 20px #10b981;animation:ledPulse 1.6s infinite}
+        @keyframes serverGlow{0%,100%{transform:scale(1);box-shadow:0 0 8px rgba(16,185,129,0.2)}50%{transform:scale(1.03);box-shadow:0 0 16px rgba(16,185,129,0.5)}}
+        @keyframes ledPulse{0%,100%{opacity:0.4;transform:scale(0.9)}50%{opacity:1;transform:scale(1.2)}}
+        @media(max-width:640px){.input-main{padding:14px 16px 14px 100px;font-size:13px}.paste-btn{left:36px;padding:6px 10px;font-size:11px}.clear-btn{left:8px;font-size:14px}}
     </style>
-  </head>
-  <body>
-    <!-- WELCOME MODAL -->
-    <div id="welcomeModal" class="welcome-modal">
-        <div class="welcome-content glass w-[90%] max-w-[450px] p-6 rounded-3xl text-center border border-white/10 shadow-2xl">
-            <h2 class="text-xl font-black text-white mb-2 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-wand-magic-sparkles text-pink-500"></i> بەخێرهاتی بۆ KrdDown
-            </h2>
-            <p class="text-xs text-slate-400 mb-5">تکایە ئەو تۆڕە جڤاکیە دیار بکە کو دێ ڤیدیۆیێ ژێ دابەزینی:</p>
-            <div class="flex flex-col gap-3">
-                <button onclick="selectNetwork('TikTok', 'linear-gradient(135deg, #ff0050, #000000)')" class="network-btn net-tiktok w-full bg-slate-900/80 border border-white/5 py-3.5 px-4 rounded-2xl text-left flex items-center justify-between text-white text-sm font-bold">
-                    <span class="flex items-center gap-3"><i class="fa-brands fa-tiktok text-lg text-rose-500"></i> TikTok</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
-                </button>
-                <button onclick="selectNetwork('Instagram', 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)')" class="network-btn net-instagram w-full bg-slate-900/80 border border-white/5 py-3.5 px-4 rounded-2xl text-left flex items-center justify-between text-white text-sm font-bold">
-                    <span class="flex items-center gap-3"><i class="fa-brands fa-instagram text-lg text-pink-500"></i> Instagram</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
-                </button>
-                <button onclick="selectNetwork('Facebook', 'linear-gradient(135deg, #1877f2, #0056b3)')" class="network-btn net-facebook w-full bg-slate-900/80 border border-white/5 py-3.5 px-4 rounded-2xl text-left flex items-center justify-between text-white text-sm font-bold">
-                    <span class="flex items-center gap-3"><i class="fa-brands fa-facebook text-lg text-sky-500"></i> Facebook</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
-                </button>
-                <button onclick="selectNetwork('YouTube', 'linear-gradient(135deg, #ff0000, #cc0000)')" class="network-btn net-pinterest w-full bg-slate-900/80 border border-white/5 py-3.5 px-4 rounded-2xl text-left flex items-center justify-between text-white text-sm font-bold">
-                    <span class="flex items-center gap-3"><i class="fa-brands fa-youtube text-lg text-red-600"></i> YouTube</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
-                </button>
-                <button onclick="selectNetwork('Pinterest', 'linear-gradient(135deg, #e60023, #b3001b)')" class="network-btn net-pinterest w-full bg-slate-900/80 border border-white/5 py-3.5 px-4 rounded-2xl text-left flex items-center justify-between text-white text-sm font-bold">
-                    <span class="flex items-center gap-3"><i class="fa-brands fa-pinterest text-lg text-red-600"></i> Pinterest</span>
-                    <i class="fa-solid fa-chevron-left text-xs opacity-40"></i>
-                </button>
-            </div>
-            <div class="mt-4 p-3 bg-white/5 rounded-2xl border border-white/5 text-right">
-                <p class="text-[11px] text-slate-400 leading-relaxed"><i class="fa-solid fa-lightbulb text-amber-400 ml-1"></i> <b>فێرکاری کورت:</b> تەنها لینکی پۆستێ کۆپیکری و ل کادرا ژوورێ دابنێ.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTACT MODAL -->
-    <div id="contactModal" class="welcome-modal" onclick="closeContactModal(event)">
-        <div class="welcome-content glass w-[90%] max-w-[400px] p-6 rounded-3xl text-center border border-white/10 shadow-2xl relative">
-            <button onclick="document.getElementById('contactModal').classList.remove('show')" class="absolute top-4 left-4 w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white text-xs transition-all">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 class="text-base font-black text-white mb-4"><i class="fa-solid fa-envelope-open-text text-purple-400"></i> ڕێگەیێن پەیوەندیێ</h3>
-            <div class="grid grid-cols-2 gap-3">
-                <a href="https://www.instagram.com/z44nko" target="_blank" class="about-social-btn as-ig"><i class="fab fa-instagram text-lg"></i> Instagram</a>
-                <a href="https://www.tiktok.com/@z44nko" target="_blank" class="about-social-btn as-tt"><i class="fab fa-tiktok text-lg"></i> TikTok</a>
-                <a href="https://t.me/z_14x" target="_blank" class="about-social-btn as-tg"><i class="fab fa-telegram-plane text-lg"></i> Telegram</a>
-                <a href="mailto:zaniyar.mzuri@email.com" class="about-social-btn bg-blue-600/10 hover:bg-blue-600 hover:text-white"><i class="fa-solid fa-envelope text-lg"></i> Email</a>
-            </div>
-        </div>
-    </div>
-
+</head>
+<body>
     <div class="toast-container" id="toastContainer"></div>
     
-    <!-- PWA BANNER -->
-    <div id="pwaBanner" class="p-4 flex items-center justify-between gap-4 backdrop-blur-xl">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white text-xl shadow-md flex-shrink-0">
-          <i class="fa-solid fa-cloud-arrow-down"></i>
-        </div>
-        <div>
-          <h4 class="text-xs font-black text-white">KrdDown App</h4>
-          <p class="text-[10px] text-slate-400 mt-0.5">جێگیرکە وەک ئەپ لەسەر شاشێ.</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <button onclick="dismissPwa()" class="text-xs text-slate-400 hover:text-white px-2 py-1">پاشان</button>
-        <button onclick="installPwa()" class="btn-pink text-white text-xs font-black px-4 py-2 rounded-xl shadow-sm">جێگیرکە</button>
-      </div>
-    </div>
-
-    <!-- TOP BAR -->
-    <div class="social-header-bar bg-black/20 border-b border-white/5 py-2">
-      <div class="container mx-auto px-4 flex justify-between items-center">
+    <div class="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-black/20">
         <div class="flex gap-4">
-          <a href="https://t.me/KrdDown_Bot" target="_blank" class="text-white/60 hover:text-white text-lg"><i class="fa-brands fa-telegram"></i></a>
-          <a href="https://www.instagram.com/z44nko" target="_blank" class="text-white/60 hover:text-white text-lg"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://t.me/KrdDown_Bot" target="_blank" class="text-white/60 hover:text-white text-lg"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://t.me/z_14x" target="_blank" class="text-white/60 hover:text-white text-lg"><i class="fa-solid fa-headset"></i></a>
         </div>
         <div class="flex items-center gap-3">
-          <span class="server-animated-badge text-[11px] font-black px-3 py-1.5 rounded-xl flex items-center gap-2 text-slate-200">
-            <span class="led-dot"></span>Server: <span class="text-emerald-400">Online</span>
-          </span>
+            <span class="server-badge text-[11px] font-black px-3 py-1.5 rounded-xl flex items-center gap-2">
+                <span class="led-dot"></span>Online
+            </span>
         </div>
-      </div>
     </div>
 
     <div class="min-h-screen">
-      <header class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 to-violet-600 flex items-center justify-center shadow-lg shadow-pink-500/20">
-            <i class="fa-solid fa-bolt text-white text-xl"></i>
-          </div>
-          <span class="text-2xl font-extrabold neon-title">Krd<span class="text-pink-500">Down</span></span>
-        </div>
-        <div>
-          <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900/80 border border-white/10 text-white text-sm rounded-xl px-3 py-2 focus:outline-none cursor-pointer">
-            <option value="badini">🌍 کوردی (بەهدینی)</option>
-            <option value="sorani">🌍 کوردی (سۆرانی)</option>
-            <option value="ar">🇸🇦 العربية</option>
-            <option value="en">🇺🇸 English</option>
-          </select>
-        </div>
-      </header>
-
-      <main class="container mx-auto px-4 max-w-2xl py-4">
-        <div class="text-center mb-6">
-          <h1 id="mainTitle" class="text-2xl sm:text-3xl font-extrabold neon-title leading-tight">دابەزاندنا ڤیدیۆ و ستۆریێن تۆڕێن جڤاکی بێ لۆگۆ</h1>
-          <p class="text-xs text-slate-400 mt-2">🎵 TikTok • 📸 Instagram • 📘 Facebook • ▶️ YouTube • 📌 Pinterest</p>
-        </div>
-
-        <!-- DOWNLOAD BOX -->
-        <div class="glass rounded-3xl p-5 shadow-2xl">
-          <div class="flex gap-2 justify-center mb-4">
-            <button onclick="switchMode('link')" id="modeLink" class="mode-btn active"><i class="fa-solid fa-link"></i> URL Link</button>
-            <button onclick="switchMode('username')" id="modeUsername" class="mode-btn"><i class="fa-solid fa-at"></i> Username</button>
-          </div>
-          
-          <div class="input-wrapper">
-            <i id="inputIcon" class="input-icon fa-solid fa-link"></i>
-            <input type="text" id="tiktokUrl" placeholder="لینکی ڤیدیۆیێ لڤێرە دانێ..." class="input-main">
-            <div class="liquid-progress" id="liquidProgressBar"></div>
-            <button onclick="clearInputField()" id="btnClearInput" class="clear-input-btn">
-                <i class="fa-solid fa-circle-xmark"></i>
-            </button>
-            <button onclick="pasteLink()" id="btnPaste" class="paste-btn">
-              <i class="fa-solid fa-paste"></i> <span id="txtPaste">پێوەکە</span>
-            </button>
-          </div>
-          
-          <button id="btnDownload" onclick="downloadVideo()" class="w-full mt-4 btn-pink text-white font-bold py-4 rounded-2xl shadow-lg flex items-center justify-center gap-2 cursor-pointer">
-            <span id="txtDownload">دابەزینە</span> <i class="fa-solid fa-arrow-down"></i>
-          </button>
-          
-          <div class="mt-5 pt-4 border-t border-white/5">
-            <span id="txtShareSectionTitle" class="text-xs font-bold text-violet-400 block mb-2">Share our website link with your friends:</span>
-            <div class="grid grid-cols-2 gap-2">
-              <button onclick="shareToTelegram()" class="btn-tg py-3 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
-                <i class="fa-brands fa-telegram text-base"></i> Telegram
-              </button>
-              <button onclick="shareToWhatsApp()" class="btn-snap py-3 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
-                <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- DEVELOPER CARD -->
-        <div class="dev-card-modern p-5 mt-5 rounded-3xl text-right">
-            <h4 class="text-sm font-black text-purple-400 flex items-center gap-2 mb-2">گەشەپێدەرێ KrdDown 🚀</h4>
-            <p class="text-xs text-slate-300 leading-relaxed mb-4">ئەڤ پلاتفۆرمە ژ لایێ <b>Zaniyar</b> ڤە هاتیە دیزاینکرن و گەشەپێدان.</p>
-            <div class="flex gap-3 text-xs border-t border-white/5 pt-3">
-                <button onclick="openContactModal()" class="text-purple-400 hover:text-blue-400 flex items-center gap-1"><i class="fa-solid fa-envelope"></i> پەیوەندی</button>
-            </div>
-        </div>
-        
-        <!-- VIP USER CARD -->
-        <div id="vipUserCard" class="hidden vip-card p-6 mt-5">
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-              <img id="vipAvatar" src="" class="w-16 h-16 rounded-2xl border-2 border-amber-400 object-cover" alt="Avatar">
-              <div>
-                <h2 id="vipName" class="text-lg font-black text-amber-400"></h2>
-                <p id="vipUsername" class="text-xs text-slate-400"></p>
-              </div>
-            </div>
-            <div class="flex gap-4 border-t border-white/5 pt-3 sm:pt-0 sm:border-none w-full sm:w-auto justify-center">
-              <div class="text-center bg-white/5 px-4 py-2 rounded-xl min-w-[70px]">
-                <span id="vipFollowers" class="block font-black text-sm text-white"></span>
-                <span class="text-[9px] text-slate-400">فۆڵۆوێرس</span>
-              </div>
-              <div class="text-center bg-white/5 px-4 py-2 rounded-xl min-w-[70px]">
-                <span id="vipHearts" class="block font-black text-sm text-white"></span>
-                <span class="text-[9px] text-slate-400">لایکەکان</span>
-              </div>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4" id="vipPostGrid"></div>
-        </div>
-
-        <!-- PREVIEW CARD -->
-        <div id="previewCard" class="hidden glass rounded-3xl p-5 mt-5">
-          <video id="previewVideo" class="w-full max-h-[350px] object-contain rounded-xl bg-black" controls></video>
-          <img id="previewImage" class="hidden w-full max-h-[350px] object-contain rounded-xl bg-black" alt="Preview">
-          <div class="mt-3 flex flex-col gap-2">
-            <h3 id="previewAuthor" class="font-bold text-sm"></h3>
-            <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex items-center justify-between gap-4">
-              <p id="previewDescription" class="text-xs text-slate-400 truncate max-w-[75%]"></p>
-              <button onclick="copyCaptionText()" class="text-[11px] bg-pink-500/10 text-pink-400 border border-pink-500/20 px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 hover:bg-pink-500 hover:text-white transition-all flex-shrink-0">
-                <i class="fa-solid fa-copy"></i> کۆپی
-              </button>
-            </div>
-          </div>
-          <div class="mt-4 border-t border-white/5 pt-4">
-            <span class="text-xs font-bold text-pink-500 block mb-2"><i class="fa-solid fa-sliders"></i> کواڵیتیا دابەزاندنێ:</span>
-            <div class="grid grid-cols-2 gap-2">
-              <button onclick="downloadWithQuality('720p')" class="bg-white/5 hover:bg-white/10 text-white py-2.5 px-3 rounded-xl text-xs font-bold">720p HD</button>
-              <button onclick="downloadWithQuality('1080p')" class="bg-white/5 hover:bg-white/10 text-white py-2.5 px-3 rounded-xl text-xs font-bold">1080p Full HD</button>
-              <button onclick="downloadWithQuality('4K')" class="bg-white/5 hover:bg-white/10 text-white py-2.5 px-3 rounded-xl text-xs font-bold">4K Ultra HD</button>
-              <button onclick="downloadPremiumQuality()" class="border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 py-2.5 px-3 rounded-xl text-xs font-black">🔒 4K HDR PRO</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PHOTO CARD -->
-        <div id="photoCard" class="hidden glass rounded-3xl p-5 mt-5">
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-sm font-bold">ئەلبومێن وێنەیان</span>
-            <button onclick="downloadAllPhotos()" class="text-xs bg-pink-500 text-white px-3 py-1 rounded-lg">هەمی دابەزینە</button>
-          </div>
-          <div class="grid grid-cols-3 gap-2" id="photoGrid"></div>
-        </div>
-
-        <!-- PLANS -->
-        <div class="glass rounded-3xl p-5 mt-5">
-            <h3 class="text-sm font-black text-amber-400 mb-4 flex items-center gap-2"><i class="fa-solid fa-crown"></i> پلانێن مە</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="plan-card plan-free rounded-2xl p-5">
-                    <h4 class="font-black text-white text-base">🆓 بێبەرامبەر</h4>
-                    <p class="text-slate-400 text-xs mb-3">بۆ بەکارهێنانی ڕۆژانە و ئاسایی</p>
-                    <ul class="space-y-2 mb-4 text-xs text-slate-300">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> داونلۆدی 1080p Full HD</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> پشتگیری هەموو تۆڕەکان</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> داونلۆدی MP3 (دەنگ)</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-times text-rose-400"></i> ڕیکلامی ئاسایی</li>
-                    </ul>
-                    <button class="w-full py-2.5 rounded-xl text-xs font-bold bg-white/10 text-white">✅ پلانی ئێستا</button>
+        <header class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 to-violet-600 flex items-center justify-center shadow-lg shadow-pink-500/20">
+                    <i class="fa-solid fa-bolt text-white text-xl"></i>
                 </div>
-                <div class="plan-card plan-pro rounded-2xl p-5 relative overflow-hidden">
-                    <div class="absolute -top-1 -right-1"><span class="plan-badge">⭐ پێشنیارکراو</span></div>
-                    <h4 class="font-black text-amber-400 text-base">💎 پرۆ</h4>
-                    <p class="text-slate-400 text-xs mb-3">بۆ کوالێتی بێوێنە و بێ ڕیکلام</p>
-                    <ul class="space-y-2 mb-4 text-xs text-slate-200">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-crown text-amber-400"></i> <b>4K Ultra HD + HDR</b></li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-film text-amber-400"></i> <b>Dolby Vision</b></li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-ban text-amber-400"></i> <b>بێ ڕیکلام</b></li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-infinity text-amber-400"></i> داونلۆدی بێسنوور</li>
-                    </ul>
-                    <button onclick="window.open('https://t.me/z_14x','_blank')" class="w-full py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 to-yellow-500 text-black">🔥 چالاککردن</button>
-                </div>
+                <span class="text-2xl font-extrabold">Krd<span class="text-pink-500">Down</span></span>
             </div>
-        </div>
+            <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900/80 border border-white/10 text-white text-sm rounded-xl px-3 py-2 cursor-pointer">
+                <option value="badini">🌍 کوردی</option>
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="en">🇺🇸 English</option>
+            </select>
+        </header>
 
-        <!-- TELEGRAM BOT -->
-        <div class="glass rounded-3xl p-5 mt-5 text-center">
-            <p class="text-xs text-slate-400">🤖 بۆتی تێلێگرام: <a href="https://t.me/KrdDown_Bot" target="_blank" class="text-pink-500 font-bold">@KrdDown_Bot</a></p>
-        </div>
-      </main>
+        <main class="container mx-auto px-4 max-w-2xl py-4">
+            <div class="text-center mb-6">
+                <h1 id="mainTitle" class="text-2xl sm:text-3xl font-extrabold leading-tight">دابەزاندنا ڤیدیۆ و ستۆریێن تۆڕێن جڤاکی بێ لۆگۆ</h1>
+                <p class="text-xs text-slate-400 mt-2">🎵 TikTok • 📸 Instagram • 📘 Facebook • ▶️ YouTube • 📌 Pinterest</p>
+            </div>
 
-      <footer class="container mx-auto px-4 py-6 text-center text-[10px] text-slate-500">
-        <p id="footerCredit">© 2026 KrdDown. گەشەپێدەر زانیار المزوري الکوردی، هەموو مافەکان پارێزراون.</p>
-        <div class="mt-3 flex justify-center gap-4 flex-wrap">
-            <a href="/privacy.html" class="hover:text-pink-400 transition-colors">سیاسەتی پاراستنی زانیاری</a>
-            <span class="text-slate-700">|</span>
-            <a href="/terms.html" class="hover:text-pink-400 transition-colors">مەرج و یاساکان</a>
-            <span class="text-slate-700">|</span>
-            <a href="https://t.me/z_14x" target="_blank" class="hover:text-pink-400 transition-colors">پەیوەندی</a>
-        </div>
-      </footer>
-    </div>
+            <div class="glass p-5 shadow-2xl">
+                <div class="flex gap-2 justify-center mb-4">
+                    <button onclick="switchMode('link')" id="modeLink" class="mode-btn active"><i class="fa-solid fa-link"></i> Link</button>
+                    <button onclick="switchMode('username')" id="modeUsername" class="mode-btn"><i class="fa-solid fa-at"></i> Username</button>
+                </div>
+                <div class="input-wrapper">
+                    <i id="inputIcon" class="input-icon fa-solid fa-link"></i>
+                    <input type="text" id="videoUrl" placeholder="لینکی ڤیدیۆیێ لڤێرە دانێ..." class="input-main">
+                    <div class="liquid-progress" id="progressBar"></div>
+                    <button onclick="clearInput()" class="clear-btn"><i class="fa-solid fa-circle-xmark"></i></button>
+                    <button onclick="pasteLink()" class="paste-btn"><i class="fa-solid fa-paste"></i> <span id="txtPaste">پێوەکە</span></button>
+                </div>
+                <button onclick="downloadVideo()" class="w-full mt-4 btn-main py-4 rounded-2xl flex items-center justify-center gap-2">
+                    <span id="txtDownload">دابەزینە</span> <i class="fa-solid fa-arrow-down"></i>
+                </button>
+            </div>
 
-    <!-- CUSTOM GALLERY MODAL -->
-    <div id="customGalleryModal" class="custom-gallery-modal">
-        <div class="custom-gallery-content">
-            <button onclick="closeCustomGallery()" class="custom-gallery-close"><i class="fa-solid fa-xmark"></i></button>
-            <button onclick="navigateCustomGallery(-1)" class="custom-gallery-nav custom-gallery-prev"><i class="fa-solid fa-chevron-right"></i></button>
-            <div class="w-full bg-slate-900/90 rounded-3xl border border-white/10 p-4 shadow-2xl">
-                <video id="galleryPopupVideo" class="w-full max-h-[70vh] object-contain rounded-xl bg-black" controls></video>
-                <div class="mt-3 flex flex-col gap-2">
-                    <h3 id="galleryPopupAuthor" class="font-bold text-sm text-pink-500"></h3>
-                    <div class="bg-white/5 border border-white/5 rounded-xl p-3 flex items-center justify-between gap-4">
-                        <p id="galleryPopupDesc" class="text-xs text-slate-300 truncate max-w-[75%]"></p>
-                        <button onclick="copyGalleryCaption()" class="text-[11px] bg-pink-500/10 text-pink-400 border border-pink-500/20 px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 hover:bg-pink-500 hover:text-white transition-all flex-shrink-0">
-                            <i class="fa-solid fa-copy"></i>
-                        </button>
+            <div id="previewCard" class="hidden glass p-5 mt-5">
+                <video id="previewVideo" class="w-full max-h-[350px] object-contain rounded-xl bg-black" controls></video>
+                <div class="mt-3">
+                    <h3 id="previewAuthor" class="font-bold text-sm"></h3>
+                    <p id="previewDescription" class="text-xs text-slate-400 truncate"></p>
+                </div>
+                <div class="mt-4 border-t border-white/5 pt-4">
+                    <span class="text-xs font-bold text-pink-500 block mb-2">کواڵیتیا دابەزاندنێ:</span>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="downloadWithQuality('720p')" class="bg-white/5 hover:bg-white/10 text-white py-2.5 px-3 rounded-xl text-xs font-bold">720p HD</button>
+                        <button onclick="downloadWithQuality('1080p')" class="bg-white/5 hover:bg-white/10 text-white py-2.5 px-3 rounded-xl text-xs font-bold">1080p Full HD</button>
+                        <button onclick="downloadWithQuality('4K')" class="bg-white/5 hover:bg-white/10 text-white py-2.5 px-3 rounded-xl text-xs font-bold">4K Ultra HD</button>
+                        <button onclick="downloadWithQuality('4K-HDR')" class="border border-amber-500/40 bg-amber-500/10 text-amber-400 py-2.5 px-3 rounded-xl text-xs font-black">🔒 4K HDR PRO</button>
                     </div>
                 </div>
-                <div class="flex gap-2 mt-4 pt-3 border-t border-white/5">
-                    <button id="galleryPopupDlBtn" class="flex-1 btn-pink text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-md">
-                        <i class="fa-solid fa-download"></i> داونلۆد
-                    </button>
-                    <button id="galleryPopupAudioBtn" class="flex-1 bg-white/10 text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-music"></i> MP3
-                    </button>
+            </div>
+
+            <div class="glass p-5 mt-5">
+                <h3 class="text-sm font-black text-amber-400 mb-4"><i class="fa-solid fa-crown"></i> پلانێن مە</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="plan-card plan-free">
+                        <h4 class="font-black text-white text-base">🆓 بێبەرامبەر</h4>
+                        <p class="text-slate-400 text-xs mb-3">بۆ بەکارهێنانی ڕۆژانە</p>
+                        <ul class="space-y-2 mb-4 text-xs text-slate-300">
+                            <li><i class="fa-solid fa-check text-emerald-400"></i> 1080p Full HD</li>
+                            <li><i class="fa-solid fa-check text-emerald-400"></i> هەموو تۆڕەکان</li>
+                            <li><i class="fa-solid fa-check text-emerald-400"></i> MP3 دەنگ</li>
+                            <li><i class="fa-solid fa-times text-rose-400"></i> ڕیکلام</li>
+                        </ul>
+                        <button class="w-full py-2.5 rounded-xl text-xs font-bold bg-white/10 text-white">✅ پلانی ئێستا</button>
+                    </div>
+                    <div class="plan-card plan-pro relative overflow-hidden">
+                        <div class="absolute -top-1 -right-1"><span class="badge">⭐ پێشنیارکراو</span></div>
+                        <h4 class="font-black text-amber-400 text-base">💎 پرۆ</h4>
+                        <p class="text-slate-400 text-xs mb-3">بۆ کوالێتی بێوێنە</p>
+                        <ul class="space-y-2 mb-4 text-xs text-slate-200">
+                            <li><i class="fa-solid fa-crown text-amber-400"></i> <b>4K Ultra HD + HDR</b></li>
+                            <li><i class="fa-solid fa-film text-amber-400"></i> <b>Dolby Vision</b></li>
+                            <li><i class="fa-solid fa-ban text-amber-400"></i> <b>بێ ڕیکلام</b></li>
+                            <li><i class="fa-solid fa-infinity text-amber-400"></i> بێسنوور</li>
+                        </ul>
+                        <button onclick="window.open('https://t.me/z_14x','_blank')" class="w-full py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 to-yellow-500 text-black">🔥 چالاککردن</button>
+                    </div>
                 </div>
             </div>
-            <button onclick="navigateCustomGallery(1)" class="custom-gallery-nav custom-gallery-next"><i class="fa-solid fa-chevron-left"></i></button>
-        </div>
+
+            <div class="glass p-5 mt-5 text-center">
+                <p class="text-xs text-slate-400">🤖 بۆتی تێلێگرام: <a href="https://t.me/KrdDown_Bot" target="_blank" class="text-pink-500 font-bold">@KrdDown_Bot</a></p>
+            </div>
+        </main>
+
+        <footer class="container mx-auto px-4 py-6 text-center text-[10px] text-slate-500">
+            <p>© 2026 KrdDown. گەشەپێدەر زانیار المزوري الکوردی</p>
+            <div class="mt-3 flex justify-center gap-4 flex-wrap">
+                <a href="/privacy.html" class="hover:text-pink-400">سیاسەتی پاراستنی زانیاری</a>
+                <span class="text-slate-700">|</span>
+                <a href="/terms.html" class="hover:text-pink-400">مەرج و یاساکان</a>
+                <span class="text-slate-700">|</span>
+                <a href="https://t.me/z_14x" target="_blank" class="hover:text-pink-400">پەیوەندی</a>
+            </div>
+        </footer>
     </div>
 
     <script>
-        // ==================== GLOBAL VARIABLES ====================
-        let currentLang = localStorage.getItem('tikjet_lang') || 'badini';
-        let currentMode = 'link';
-        let albumImages = [];
-        let searchHistory = JSON.parse(localStorage.getItem('tikjet_history') || '[]');
-        let currentActiveVideoUrl = '';
-        let deferredPrompt;
-        let activeGalleryList = [];
-        let activeGalleryIndex = 0;
-        let userPlan = localStorage.getItem('krddown_plan') || 'free';
-
-        // ==================== LANGUAGE DATA ====================
-        const langData = {
-            badini: {
-                title: 'دابەزاندنا ڤیدیۆ و ستۆریێن تۆڕێن جڤاکی بێ لۆگۆ',
-                placeholder: 'لینکی ڤیدیۆیێ لڤێرە دانێ...',
-                placeholderUser: 'ناڤێ حسابێ بنڤیسە...',
-                paste: 'پێوەکە',
-                download: 'دابەزینە',
-                footer: '© 2026 KrdDown. گەشەپێدەر زانیار المزوري الکوردی',
-                downloadSuccess: 'سەرکەفتی بوو! 🎉',
-                downloadFailed: 'نەتوانرا دابەزێنیت! 🚫',
-                networkError: 'کێشەیەک ڕوویدا! دووبارە هەوڵبدەرەوە 🔄',
-                noMedia: 'هیچ میدیا نینە!',
-                proRequired: '🔒 بۆ 4K پێویستت بە پلانی پرۆ هەیە!'
-            },
-            en: {
-                title: 'Download Social Media Videos & Stories Without Watermark',
-                placeholder: 'Paste video link here...',
-                placeholderUser: 'Enter username...',
-                paste: 'Paste',
-                download: 'Download',
-                footer: '© 2026 KrdDown. Developed by Zanyar Al-Mzuri',
-                downloadSuccess: 'Download Successful! 🎉',
-                downloadFailed: 'Download Failed! 🚫',
-                networkError: 'An error occurred! Please try again 🔄',
-                noMedia: 'No media found!',
-                proRequired: '🔒 Pro plan required for 4K!'
-            }
+        let currentMode='link',currentVideoUrl='',userPlan='free';
+        const langData={
+            badini:{title:'دابەزاندنا ڤیدیۆ و ستۆریێن تۆڕێن جڤاکی بێ لۆگۆ',placeholder:'لینکی ڤیدیۆیێ لڤێرە دانێ...',placeholderUser:'ناڤێ حسابێ بنڤیسە...',paste:'پێوەکە',download:'دابەزینە'},
+            ar:{title:'تحميل فيديوهات وقصص منصات التواصل',placeholder:'ضع رابط الفيديو هنا...',placeholderUser:'أدخل اسم المستخدم...',paste:'لصق',download:'تحميل'},
+            en:{title:'Download Social Media Videos & Stories',placeholder:'Paste video link here...',placeholderUser:'Enter username...',paste:'Paste',download:'Download'}
         };
-
-        // ==================== HELPER FUNCTIONS ====================
-        function t(key) { const l = langData[currentLang] || langData['badini']; return l[key] || key; }
-
-        function toast(message, icon = 'fa-circle-info') {
-            const container = document.getElementById('toastContainer');
-            const toastEl = document.createElement('div');
-            toastEl.className = 'toast';
-            toastEl.innerHTML = `<i class="fa-solid ${icon}"></i> ${message}`;
-            container.appendChild(toastEl);
-            setTimeout(() => toastEl.remove(), 3000);
-        }
-
-        function animateProgress() {
-            const bar = document.getElementById('liquidProgressBar');
-            bar.style.width = '0%';
-            setTimeout(() => bar.style.width = '40%', 200);
-            setTimeout(() => bar.style.width = '75%', 600);
-            setTimeout(() => bar.style.width = '100%', 1200);
-            setTimeout(() => bar.style.width = '0%', 1600);
-        }
-
-        function clearInputField() {
-            document.getElementById('tiktokUrl').value = '';
-            document.getElementById('tiktokUrl').focus();
-            toast('پاککرا 🧹');
-        }
-
-        function pasteLink() {
-            navigator.clipboard.readText().then(text => {
-                document.getElementById('tiktokUrl').value = text;
-                toast('پەیست بوو 📋');
-            }).catch(() => toast('نەتوانرا پەیست بکرێت'));
-        }
-
-        function switchMode(mode) {
-            currentMode = mode;
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-            const input = document.getElementById('tiktokUrl');
-            const icon = document.getElementById('inputIcon');
-            if (mode === 'link') {
-                document.getElementById('modeLink').classList.add('active');
-                input.placeholder = t('placeholder');
-                icon.className = 'input-icon fa-solid fa-link';
-            } else {
-                document.getElementById('modeUsername').classList.add('active');
-                input.placeholder = t('placeholderUser');
-                icon.className = 'input-icon fa-solid fa-at';
-            }
-        }
-
-        function changeLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('tikjet_lang', lang);
-            document.getElementById('mainTitle').textContent = t('title');
-            document.getElementById('txtPaste').textContent = t('paste');
-            document.getElementById('txtDownload').textContent = t('download');
-            document.getElementById('footerCredit').textContent = t('footer');
-            document.getElementById('tiktokUrl').placeholder = currentMode === 'link' ? t('placeholder') : t('placeholderUser');
-            document.getElementById('langSelect').value = lang;
-        }
-
-        function selectNetwork(name, gradient) {
-            document.getElementById('welcomeModal').classList.remove('show');
-            document.getElementById('btnDownload').style.background = gradient;
-            toast(`تۆڕێ ${name} هاتە هەڵبژاردن! 🚀`);
-        }
-
-        function openContactModal() { document.getElementById('contactModal').classList.add('show'); }
-        function closeContactModal(e) { if(e.target.id === 'contactModal') document.getElementById('contactModal').classList.remove('show'); }
-
-        function shareToTelegram() {
-            window.open(`https://t.me/share/url?url=${encodeURIComponent('https://krddown.vercel.app')}&text=${encodeURIComponent('باشترین دابەزێنەری ڤیدیۆ 🚀')}`, '_blank');
-        }
-
-        function shareToWhatsApp() {
-            window.open(`https://wa.me/?text=${encodeURIComponent('باشترین دابەزێنەری ڤیدیۆ 🚀 https://krddown.vercel.app')}`, '_blank');
-        }
-
-        function copyCaptionText() {
-            const desc = document.getElementById('previewDescription').textContent;
-            if (!desc) return;
-            navigator.clipboard.writeText(desc).then(() => toast('کۆپی بوو! ✅'));
-        }
-
-        function forceDownload(url, filename) {
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        }
-
-        function downloadWithQuality(quality) {
-            if (!currentActiveVideoUrl) return toast(t('noMedia'), 'fa-times');
-            if ((quality === '4K' || quality === '4K-HDR') && userPlan !== 'pro') return toast(t('proRequired'), 'fa-lock');
-            forceDownload(currentActiveVideoUrl, `KrdDown_${quality}.mp4`);
-            toast('داونلۆد دەستیپێکرد! 📥', 'fa-check');
-        }
-
-        function downloadPremiumQuality() {
-            if (userPlan !== 'pro') return toast(t('proRequired'), 'fa-lock');
-            if (!currentActiveVideoUrl) return toast(t('noMedia'), 'fa-times');
-            forceDownload(currentActiveVideoUrl, 'KrdDown_4K_HDR.mp4');
-            toast('4K HDR داونلۆد کرا! 🎉', 'fa-crown');
-        }
-
-        function downloadAllPhotos() {
-            if (albumImages.length === 0) return;
-            albumImages.forEach((url, i) => setTimeout(() => forceDownload(url, `KrdDown_Photo_${i+1}.jpg`), i * 300));
-        }
-
-        // ==================== PWA ====================
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(() => {}); });
-        }
-        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
-        function installPwa() { if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; } }
-        function dismissPwa() { document.getElementById('pwaBanner').classList.remove('show'); }
-
-        // ==================== CUSTOM GALLERY ====================
-        async function openCustomGallery(index) {
-            if(!activeGalleryList || activeGalleryList.length === 0) return;
-            activeGalleryIndex = index;
-            document.getElementById('customGalleryModal').style.display = 'flex';
-            loadVideoInGalleryPopup();
-        }
-        async function loadVideoInGalleryPopup() {
-            const currentItem = activeGalleryList[activeGalleryIndex];
-            const videoElement = document.getElementById('galleryPopupVideo');
-            videoElement.pause(); videoElement.src = '';
-            try {
-                let directApiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(currentItem.url)}`;
-                const res = await fetch(directApiUrl);
-                const json = await res.json();
-                if(json.code === 0 && json.data) {
-                    const d = json.data;
-                    videoElement.src = d.play;
-                    document.getElementById('galleryPopupAuthor').textContent = d.author.nickname || 'User';
-                    document.getElementById('galleryPopupDesc').textContent = d.title || '';
-                    document.getElementById('galleryPopupDlBtn').onclick = () => forceDownload(d.play, `KrdDown_${d.id}.mp4`);
-                }
-            } catch { document.getElementById('galleryPopupDesc').textContent = "کێشەیەک ڕوویدا"; }
-        }
-        function navigateCustomGallery(direction) {
-            if(activeGalleryList.length <= 1) return;
-            activeGalleryIndex += direction;
-            if(activeGalleryIndex >= activeGalleryList.length) activeGalleryIndex = 0;
-            if(activeGalleryIndex < 0) activeGalleryIndex = activeGalleryList.length - 1;
-            loadVideoInGalleryPopup();
-        }
-        function closeCustomGallery() { document.getElementById('galleryPopupVideo').pause(); document.getElementById('customGalleryModal').style.display = 'none'; }
-        function copyGalleryCaption() { const desc = document.getElementById('galleryPopupDesc').textContent; if(desc) { navigator.clipboard.writeText(desc); toast('کۆپی بوو! ✅'); } }
-
-        // ==================== HISTORY ====================
-        function saveToHistory(value, type) {
-            searchHistory = searchHistory.filter(h => h.value !== value);
-            searchHistory.unshift({ value, type });
-            if (searchHistory.length > 10) searchHistory.pop();
-            localStorage.setItem('tikjet_history', JSON.stringify(searchHistory));
-        }
-
-        // ==================== MAIN DOWNLOAD FUNCTION (FIXED) ====================
-        async function downloadVideo() {
-            let input = document.getElementById('tiktokUrl').value.trim();
-            if (!input) return toast('تکایە دەقەکێ بنڤیسە!', 'fa-exclamation');
-            
-            animateProgress();
-            const btn = document.getElementById('btnDownload');
-            btn.disabled = true;
-            
-            document.getElementById('previewCard').classList.add('hidden');
-            document.getElementById('photoCard').classList.add('hidden');
-            document.getElementById('vipUserCard').classList.add('hidden');
-            
-            const isTikTok = input.includes('tiktok.com') || input.includes('vm.tiktok.com');
-            
-            // ========== ALL NETWORKS (Instagram, Facebook, YouTube, Pinterest) ==========
-            if (currentMode === 'link' && !isTikTok) {
-                try {
-                    let response, result;
-                    
-                    try {
-                        response = await fetch('/api/proxy', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ url: input })
-                        });
-                        result = await response.json();
-                    } catch (proxyError) {
-                        response = await fetch('https://api.cobalt.tools/api/json', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                            body: JSON.stringify({ url: input, vQuality: '1080', filenamePattern: 'pretty', isNoTTWatermark: true })
-                        });
-                        result = await response.json();
-                    }
-                    
-                    if (result.status === 'redirect' || result.status === 'stream') {
-                        saveToHistory(input, currentMode);
-                        currentActiveVideoUrl = result.url;
-                        const pCard = document.getElementById('previewCard'); 
-                        pCard.classList.remove('hidden');
-                        document.getElementById('previewImage').classList.add('hidden'); 
-                        document.getElementById('previewVideo').classList.remove('hidden');
-                        document.getElementById('previewVideo').src = result.url;
-                        document.getElementById('previewAuthor').textContent = 'Social Media';
-                        document.getElementById('previewDescription').textContent = result.filename || 'Ready to Download';
-                        toast(t('downloadSuccess'), 'fa-check');
-                    } else if (result.status === 'picker' && result.picker && result.picker.length > 0) {
-                        saveToHistory(input, currentMode);
-                        albumImages = result.picker.map(item => item.url);
-                        const grid = document.getElementById('photoGrid'); 
-                        grid.innerHTML = '';
-                        albumImages.forEach((url, i) => {
-                            const container = document.createElement('div');
-                            container.className = "relative group rounded-lg overflow-hidden";
-                            container.innerHTML = `<img src="${url}" class="w-full aspect-square object-cover" alt="Image" onerror="this.src='/icon.png'"><button onclick="forceDownload('${url}', 'img_${i}.jpg')" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-xs font-bold"><i class="fa-solid fa-download"></i></button>`;
-                            grid.appendChild(container);
-                        });
-                        document.getElementById('photoCard').classList.remove('hidden');
-                        toast(t('downloadSuccess'), 'fa-check');
-                    } else {
-                        toast(t('downloadFailed'), 'fa-times');
-                    }
-                } catch (error) {
-                    toast(t('networkError'), 'fa-exclamation-triangle');
-                } finally {
-                    btn.disabled = false;
-                }
-                return;
-            }
-
-            // ========== TIKTOK API ==========
-            try {
-                let apiUrl = currentMode === 'link' 
-                    ? `https://www.tikwm.com/api/?url=${encodeURIComponent(input)}` 
-                    : `https://www.tikwm.com/api/user/posts?unique_id=${encodeURIComponent(input.replace('@',''))}&count=15`;
-                
-                const res = await fetch(apiUrl);
-                const data = await res.json();
-
-                if (data.code === 0 && data.data) {
-                    saveToHistory(input, currentMode);
-                    if (currentMode === 'link') {
-                        const d = data.data;
-                        if (d.images && d.images.length > 0) {
-                            albumImages = d.images;
-                            const grid = document.getElementById('photoGrid'); grid.innerHTML = '';
-                            d.images.forEach((url, i) => {
-                                const container = document.createElement('div');
-                                container.className = "relative group rounded-lg overflow-hidden";
-                                container.innerHTML = `<img src="${url}" class="w-full aspect-square object-cover" alt="TikTok Image"><button onclick="forceDownload('${url}', 'TikTok_${i+1}.jpg')" class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-xs font-bold"><i class="fa-solid fa-download"></i></button>`;
-                                grid.appendChild(container);
-                            });
-                            document.getElementById('photoCard').classList.remove('hidden');
-                        } else {
-                            currentActiveVideoUrl = d.play;
-                            const pCard = document.getElementById('previewCard'); pCard.classList.remove('hidden');
-                            document.getElementById('previewImage').classList.add('hidden'); document.getElementById('previewVideo').classList.remove('hidden');
-                            document.getElementById('previewVideo').src = d.play;
-                            document.getElementById('previewAuthor').textContent = d.author.nickname || 'User';
-                            document.getElementById('previewDescription').textContent = d.title || '';
-                        }
-                    } else {
-                        const posts = data.data.videos;
-                        if(posts && posts.length > 0) {
-                            const user = posts[0].author;
-                            document.getElementById('vipAvatar').src = user.avatar; 
-                            document.getElementById('vipName').textContent = user.nickname; 
-                            document.getElementById('vipUsername').textContent = `@${user.unique_id}`;
-                            document.getElementById('vipFollowers').textContent = 'N/A'; 
-                            document.getElementById('vipHearts').textContent = 'N/A';
-                            const grid = document.getElementById('vipPostGrid'); grid.innerHTML = '';
-                            activeGalleryList = posts.map(p => ({ url: `https://www.tiktok.com/@${user.unique_id}/video/${p.video_id}` }));
-                            posts.forEach((p, idx) => {
-                                const item = document.createElement('div');
-                                item.className = "relative rounded-xl overflow-hidden aspect-square bg-slate-800 cursor-pointer group";
-                                item.innerHTML = `<img src="${p.cover}" class="w-full h-full object-cover" alt="Cover"><div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"><i class="fa-solid fa-play text-white text-lg"></i></div>`;
-                                item.onclick = () => { openCustomGallery(idx); };
-                                grid.appendChild(item);
-                            });
-                            document.getElementById('vipUserCard').classList.remove('hidden');
-                        } else { toast('چو پۆست نەهاتنە دیتن!', 'fa-times'); }
-                    }
-                    toast(t('downloadSuccess'), 'fa-check');
-                } else { toast(t('downloadFailed'), 'fa-times'); }
-            } catch { toast(t('networkError'), 'fa-times'); }
-            finally { btn.disabled = false; }
-        }
-
-        // ==================== INITIALIZATION ====================
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => { document.getElementById('welcomeModal').classList.add('show'); }, 600);
-            if (!currentLang) { currentLang = 'badini'; }
-            changeLanguage(currentLang);
-            document.getElementById('langSelect').value = currentLang;
-        });
+        function toast(m,i='fa-circle-info'){const c=document.getElementById('toastContainer'),t=document.createElement('div');t.className='toast';t.innerHTML=`<i class="fa-solid ${i}"></i> ${m}`;c.appendChild(t);setTimeout(()=>t.remove(),3000)}
+        function animateProgress(){const b=document.getElementById('progressBar');b.style.width='0%';setTimeout(()=>b.style.width='40%',200);setTimeout(()=>b.style.width='75%',600);setTimeout(()=>b.style.width='100%',1200);setTimeout(()=>b.style.width='0%',1600)}
+        function clearInput(){document.getElementById('videoUrl').value='';document.getElementById('videoUrl').focus();toast('پاککرا 🧹')}
+        function pasteLink(){navigator.clipboard.readText().then(t=>{document.getElementById('videoUrl').value=t;toast('پەیست بوو 📋')}).catch(()=>toast('نەتوانرا'))}
+        function switchMode(m){currentMode=m;document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));const i=document.getElementById('videoUrl'),icon=document.getElementById('inputIcon'),l=langData[document.getElementById('langSelect').value]||langData.badini;if(m==='link'){document.getElementById('modeLink').classList.add('active');i.placeholder=l.placeholder;icon.className='input-icon fa-solid fa-link'}else{document.getElementById('modeUsername').classList.add('active');i.placeholder=l.placeholderUser;icon.className='input-icon fa-solid fa-at'}}
+        function changeLanguage(l){const d=langData[l]||langData.badini;document.getElementById('mainTitle').textContent=d.title;document.getElementById('txtPaste').textContent=d.paste;document.getElementById('txtDownload').textContent=d.download;document.getElementById('videoUrl').placeholder=currentMode==='link'?d.placeholder:d.placeholderUser}
+        async function downloadVideo(){const input=document.getElementById('videoUrl').value.trim();if(!input)return toast('تکایە لینکێک بنێرە!','fa-exclamation');animateProgress();const btn=document.querySelector('.btn-main');btn.disabled=true;document.getElementById('previewCard').classList.add('hidden');const isTT=input.includes('tiktok.com');if(!isTT&&currentMode==='link'){try{let r,d;try{r=await fetch('/api/proxy',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:input})});d=await r.json()}catch(e){r=await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({url:input,vQuality:'1080',filenamePattern:'pretty',isNoTTWatermark:true})});d=await r.json()}if(d.status==='redirect'||d.status==='stream'){currentVideoUrl=d.url;const c=document.getElementById('previewCard');c.classList.remove('hidden');document.getElementById('previewVideo').src=d.url;document.getElementById('previewAuthor').textContent='Media Ready';document.getElementById('previewDescription').textContent=d.filename||'';toast('سەرکەفتی بوو! 🎉','fa-check')}else{toast('نەتوانرا دابەزێنیت 🚫','fa-times')}}catch(e){toast('کێشەیەک ڕوویدا 🔄','fa-exclamation-triangle')}finally{btn.disabled=false}return}try{const r=await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(input)}`);const d=await r.json();if(d.code===0&&d.data){const v=d.data;currentVideoUrl=v.play;const c=document.getElementById('previewCard');c.classList.remove('hidden');document.getElementById('previewVideo').src=v.play;document.getElementById('previewAuthor').textContent=v.author?.nickname||'User';document.getElementById('previewDescription').textContent=v.title||'';toast('سەرکەفتی بوو! 🎉','fa-check')}else{toast('میدیا نەهاتە دیتن 📎','fa-times')}}catch(e){toast('کێشەیەک ڕوویدا 🔄','fa-times')}finally{btn.disabled=false}}
+        function downloadWithQuality(q){if(!currentVideoUrl)return toast('هیچ میدیا نینە!','fa-times');if((q==='4K'||q==='4K-HDR')&&userPlan!=='pro')return toast('🔒 پێویستت بە پلانی پرۆ هەیە!','fa-lock');toast(`${q} دهێتە داونلۆدکردن... 🚀`,'fa-circle-notch fa-spin');setTimeout(()=>{window.open(currentVideoUrl,'_blank');toast('داونلۆد دەستیپێکرد! 📥','fa-check')},1000)}
     </script>
-  </body>
+</body>
 </html>
