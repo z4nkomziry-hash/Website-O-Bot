@@ -1,1 +1,8 @@
-{"name":"krddown","version":"2.0.0","scripts":{"start":"vercel dev"}}
+{
+  "name": "krddown",
+  "version": "2.0.0",
+  "description": "KrdDown - Social Media Downloader",
+  "scripts": {
+    "start": "vercel dev"
+  }
+}
