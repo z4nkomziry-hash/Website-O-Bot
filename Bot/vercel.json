@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "bot.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/bot.js"
+    }
+  ],
+  "env": {
+    "BOT_TOKEN": "AAFk0huUXrMTccIDY33p1sx1ioXQ8hMk92k",
+    "PROXY_API_URL": "https://krddown.vercel.app/api/proxy",
+    "SITE_URL": "https://krddown.vercel.app"
+  }
+}
