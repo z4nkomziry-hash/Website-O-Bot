@@ -1,0 +1,35 @@
+{
+  "name": "krddown-telegram-bot",
+  "version": "2.0.0",
+  "description": "KrdDown Telegram Bot - Best Social Media Downloader Bot",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "node bot.js",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0",
+    "axios": "^1.7.0",
+    "dotenv": "^16.4.0",
+    "express": "^4.21.0"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "downloader",
+    "tiktok",
+    "instagram",
+    "facebook",
+    "youtube",
+    "pinterest",
+    "krddown",
+    "kurdish"
+  ],
+  "author": "Zanyar Al-Mzuri Al-Kurdi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zaniyar/krddown"
+  }
+}
